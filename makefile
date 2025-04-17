@@ -13,11 +13,11 @@ LINK        =
 
 # COMPILATION
 INCLUDES = $(wildcard $(INCS_DIR)/*.h)
-SOURCES  = main.c
+SOURCES  = main.c inode.c
 OBJS     = $(addprefix $(OBJS_DIR)/,$(SOURCES:.c=.o))
 
 # RUN
-ARGS = "img/img(15x15).jpeg"
+ARGS = main.c README.md makefile srcs
 
 # FONT
 MAGENTA  = \e[35m
