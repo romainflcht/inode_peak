@@ -17,7 +17,7 @@ SOURCES  = main.c inode.c
 OBJS     = $(addprefix $(OBJS_DIR)/,$(SOURCES:.c=.o))
 
 # RUN
-ARGS = main.c README.md makefile srcs
+ARGS = srcs includes objs bin /dev/tty
 
 # FONT
 MAGENTA  = \e[35m
