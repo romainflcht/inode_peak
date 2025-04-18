@@ -1,5 +1,5 @@
-TARGET = main
-
+TARGET    = main
+EXEC_NAME = inode_peak
 # DIRECTORIES OPTIONS
 SRCS_DIR = srcs
 INCS_DIR = includes
@@ -13,11 +13,11 @@ LINK        =
 
 # COMPILATION
 INCLUDES = $(wildcard $(INCS_DIR)/*.h)
-SOURCES  = main.c inode.c
+SOURCES  = main.c inode.c utils.c
 OBJS     = $(addprefix $(OBJS_DIR)/,$(SOURCES:.c=.o))
 
 # RUN
-ARGS = srcs includes objs bin /dev/tty
+ARGS = main.c main.C srcs includes bash
 
 # FONT
 MAGENTA  = \e[35m
@@ -33,10 +33,10 @@ CLEAR    = \e[2J
 CUR_HOME = \e[H
 
 
-all: $(BIN_DIR)/$(TARGET)
+all: $(BIN_DIR)/$(EXEC_NAME)
 
 
-$(BIN_DIR)/$(TARGET): $(OBJS) | mkdir_bin
+$(BIN_DIR)/$(EXEC_NAME): $(OBJS) | mkdir_bin
 	@echo "\n$(RED)--SOURCES FILE FOUND : $(RST)$(BOLD)$(SOURCES)$(RST)"
 	@echo "$(YELLOW)--OBJECTS FILE FOUND : $(RST)$(BOLD)$(OBJS)$(RST)"
 	@echo "\n$(CYAN)~LINKING $(RST)$(BOLD)$<$(RST)$(CYAN) TO EXECUTABLE TARGET $(RST)$(BOLD)$@$(RST)"
@@ -56,7 +56,7 @@ $(OBJS_DIR)/$(TARGET).o: $(TARGET).c $(INCLUDES) | mkdir_obj
 
 run: all
 	@echo "$(CLEAR)$(CUR_HOME)\r"
-	@./$(BIN_DIR)/$(TARGET) $(ARGS)
+	@./$(BIN_DIR)/$(EXEC_NAME) $(ARGS)
 
 
 mkdir_obj: 
@@ -68,7 +68,7 @@ mkdir_bin:
 clean:
 	@echo "$(CLEAR)$(CUR_HOME)$(RED)$(BOLD)~CLEANING DIRECTORY... $(RST)"
 	@rm -rf $(OBJS_DIR)
-	@rm -rf $(BIN_DIR)/$(TARGET)
+	@rm -rf $(BIN_DIR)/$(EXEC_NAME)
 	@echo "$(GREEN)-> FINISHED!$(RST)"
 
 
